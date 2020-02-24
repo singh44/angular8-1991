@@ -4,14 +4,14 @@ import {User} from "../model/user.model";
 import {Observable} from "rxjs/index";
 import {ApiResponse} from "../model/api.response";
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  baseUrl: string = 'https://angular8-1991.stackblitz.io/users/';
+  baseUrl: string = '/users/';
 
   login(loginPayload) : Observable<ApiResponse> {
-    return this.http.post<ApiResponse>('https://angular8-1991.stackblitz.io/' + 'token/generate-token', loginPayload);
+    return this.http.post<ApiResponse>(this.baseUrl + 'token/generate-token', loginPayload);
   }
 
   getUsers() : Observable<ApiResponse> {
